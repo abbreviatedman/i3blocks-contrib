@@ -16,11 +16,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 IFS=
-result=`speedtest-cli --bytes --simple`
+result=`speedtest-cli --simple`
 PING=`echo $result | sed -n 1p |cut -d ':' -f2 | cut -d ' ' -f2`
 
-DOWN=`echo $result | sed -n 2p |cut -d ':' -f2 | cut -d ' ' -f2`
+DOWN=`echo $result | sed -n 2p |cut -d ':' -f2 | cut -d '.' -f1`
 
-UP=`echo $result | sed -n 3p |cut -d ':' -f2 | cut -d ' ' -f2`
+UP=`echo $result | sed -n 3p |cut -d ':' -f2 | cut -d '.' -f1`
 
-echo  $PING" ms" $DOWN "MB/s" $UP "MB/s"
+LABEL=${LABEL:""}
+DOWN_LABEL=${DOWN_LABEL:""}
+UP_LABEL=${UP_LABEL:""}
+
+echo $LABEL $DOWN_LABEL$DOWN "MB/s" $UP_LABEL$UP "MB/s"

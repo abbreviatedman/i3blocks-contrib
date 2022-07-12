@@ -158,12 +158,12 @@ def calc_display_time(status: Status, seconds: int) -> str:
     return f" ({direction}{hours}:{minutes:02})"
 
 
-def print_status(config: Configuration):
-    print(f"{config.percentage:{PERCENTAGE_FORMAT}}{calc_display_time(config.status, config.time_to_completion)}")
+def print_status():
+    print('hi')
 
 
 def main():
-    print_status(get_configuration())
+    print_status()
 
 
 if __name__ == '__main__':
