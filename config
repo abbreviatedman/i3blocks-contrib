@@ -164,7 +164,7 @@ SENSOR_CHIP=acpitz-acpi-0
 
 [speedtest]
 LABEL=:
-interval=15
+interval=5
 DOWN_LABEL=
 UP_LABEL=
 min_width= ⬇100 MB/s ⬆100 MB/s

@@ -26,5 +26,13 @@ UP=`echo $result | sed -n 3p |cut -d ':' -f2 | cut -d '.' -f1`
 LABEL=${LABEL:""}
 DOWN_LABEL=${DOWN_LABEL:""}
 UP_LABEL=${UP_LABEL:""}
+WARNING=""
 
+if [ "$UP" -eq "0" ] || [ "$DOWN" -eq "0" ] || [ "$DOWN" -eq "" ] || [ "$UP" -eq "" ];
+then
+    notify-send "network test results: $UP/$DOWN at $(date +%T)."
+    WARNING="WARNING: "
+fi
+
+echo $WARNING$(date +%D) $(date +%T) $DOWN_LABEL$DOWN "MB/s" $UP_LABEL$UP "MB/s" >> ~/speedtest-output.txt
 echo $LABEL $DOWN_LABEL$DOWN "MB/s" $UP_LABEL$UP "MB/s"
