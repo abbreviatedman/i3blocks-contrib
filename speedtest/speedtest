@@ -16,12 +16,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 IFS=
-result=`speedtest-cli --simple`
-PING=`echo $result | sed -n 1p |cut -d ':' -f2 | cut -d ' ' -f2`
-
-DOWN=`echo $result | sed -n 2p |cut -d ':' -f2 | cut -d '.' -f1`
-
-UP=`echo $result | sed -n 3p |cut -d ':' -f2 | cut -d '.' -f1`
+result=`speedtest++ --output text`
+DOWN=`echo $result | grep DOWN | awk -F"=" '{print $NF}'`
+UP=`echo $result | grep UP | awk -F"=" '{print $NF}'`
 
 LABEL=${LABEL:""}
 DOWN_LABEL=${DOWN_LABEL:""}
@@ -30,7 +27,7 @@ WARNING=""
 
 if [ "$UP" -eq "0" ] || [ "$DOWN" -eq "0" ] || [ "$DOWN" -eq "" ] || [ "$UP" -eq "" ];
 then
-    notify-send "network test results: $UP/$DOWN at $(date +%T)."
+    notify-send "net speeds: $UP/$DOWN at $(date +%T)."
     WARNING="WARNING: "
 fi
 
